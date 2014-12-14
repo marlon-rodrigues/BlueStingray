@@ -1,0 +1,23 @@
+/*
+    CSS for footer
+*/
+/* 
+    Created on : Dec 13, 2014, 6:37:37 PM
+    Author     : marlongeraldorodriguesviana
+*/
+
+#footer_nav {
+    background: black;
+    height: 4em;
+    width: 100%;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: white;
+    position:absolute;
+    bottom:0;
+    text-align: center;
+}
+
+#footer_terms {
+    color: white;
+}

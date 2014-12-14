@@ -1,0 +1,54 @@
+/*
+    CSS for main file
+*/
+/* 
+    Created on : Dec 13, 2014, 6:37:54 PM
+    Author     : marlongeraldorodriguesviana
+*/
+@font-face {      
+    font-weight: normal;  
+    font-style: normal;  
+}  
+     
+html,body{ 
+    width:100%;     
+    height:100%;  
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+    min-width: 410px;
+    font-family: 'Fjalla One', sans-serif;   
+}
+
+body {
+    background: #44749D;
+}
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#content {
+    padding-bottom:4em;   
+    //height: 10em;
+}
+
+#accordion_sys_manager {
+    margin-top: 7em;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#option_managers {
+    padding-top: 2em;
+}
+
+#option_managers button {
+    display: inline-block;
+}
+
+#option_managers label {
+    display: inline-block; 
+}
+

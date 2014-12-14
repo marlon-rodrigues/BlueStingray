@@ -1,0 +1,29 @@
+/*
+    CSS for header
+*/
+/* 
+    Created on : Dec 13, 2014, 6:37:45 PM
+    Author     : marlongeraldorodriguesviana
+*/
+#header_nav {
+    background: white;
+    //background: #44749D;
+}
+
+h1 {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    font-size: 35px;    
+}
+
+h1 span {
+    color: #44749D;
+}
+
+#header_sig {
+    float: right;
+    margin-right: 2em;
+    margin-top: 3.5em;
+}
