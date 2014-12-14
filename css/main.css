@@ -52,3 +52,15 @@ body {
     display: inline-block; 
 }
 
+#accordion_users {
+    margin-top: 5em;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#accordion_groups {
+    margin-top: 5em;
+    width: 50%;
+    margin-left: 25%;
+}
+

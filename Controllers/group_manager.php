@@ -6,49 +6,49 @@ if (!isset($_SESSION)) {
 
 date_default_timezone_set('UTC');
 
-require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/user_model.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/group_model.php');
 $function_name = $_POST['function_name'];
-$username = (isset($_POST['username'])) ? $_POST['username'] : '';
-$userid = (isset($_POST['userid'])) ? $_POST['userid'] : '';
+$groupname = (isset($_POST['groupname'])) ? $_POST['groupname'] : '';
+$groupid = (isset($_POST['groupid'])) ? $_POST['groupid'] : '';
 $return = array();
 /*
  * Redirects to the right function based on the "funciton name" passed
  * @author: Marlon Rodrigues
- * @return: json object with users information
+ * @return: json object with group information
  */
 switch ($function_name) {
-    case 'get_all_users': 
-        $return = get_all_users();
+    case 'get_all_groups': 
+        $return = get_all_groups();
         break;
-    case 'get_user_info':
-        $return = get_user_info($userid_edit);
+    case 'get_group_info':
+        $return = get_group_info($groupid);
         break;
-    case 'add_update_user':
-        $return = add_update_user($userid, $username);
+    case 'add_update_group':
+        $return = add_update_group($groupid, $groupname);
         break;
-    case 'delete_user':
-        $return = delete_user($userid);
+    case 'delete_group':
+        $return = delete_group($groupid);
         break;
 }
 echo json_encode($return);
 
 /*
- * Get a list of all users in the db
+ * Get a list of all groups in the db
  * @author: Marlon Rodrigues
- * @return: array with users or a error message
+ * @return: array with groups or a error message
  */
-function get_all_users() {
-    $return_func['users'] = true;
+function get_all_groups() {
+    $return_func['groups'] = true;
     $return_func['message'] = '';
     
-    $user_model = new User_Model();
-    $users = $user_model->get_all_users();
+    $group_model = new Group_Model();
+    $groups = $group_model->get_all_groups();
     
-    if ($users < 0) {
-        $return_func['users'] = false;
-        $return_func['message'] = 'There was an error retrieving users. Please contact Administrator.';
+    if ($groups < 0) {
+        $return_func['groups'] = false;
+        $return_func['message'] = 'There was an error retrieving groups. Please contact Administrator.';
     } else {   
-        $return_func['users'] = $users;
+        $return_func['groups'] = $groups;
     }
     
     return $return_func;

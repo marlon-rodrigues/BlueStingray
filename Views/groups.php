@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>User Editor | Blue Stingray</title>
+        <title>Group Editor | Blue Stingray</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="../Libraries/DataTables-1.9.4/media/css/demo_table_jui.css" />
         
         <script src="../js/helpers/loader.js"></script>
-        <script src="../js/users.js"></script>
+        <script src="../js/groups.js"></script>
     </head>
     <body>
         <div id="container">
@@ -36,16 +36,15 @@
             
             <div id="content">
                 
-                <div id="accordion_users" align="center">
-                    <h3>Users List</h3>
+                <div id="accordion_groups" align="center">
+                    <h3>Groups List</h3>
                     <div>
                         <div id="table">
-                            <table id="user_table" class="display">
+                            <table id="group_table" class="display">
                                 <thead>
                                     <tr>
                                         <th>id</th>
                                         <th width="150px" align="left">Name</th>
-                                        <th width="90px" align="left">Groups</th>
                                         <th width="70px"></th>
                                     </tr>
                                 </thead>
@@ -54,15 +53,15 @@
                         </div>
 
                         <div align="center" style="margin-top:2em; font-size: 1em">
-                            <button id="add_btn">Add New User</button>
+                            <button id="add_btn">Add New Group</button>
                         </div>
                         
                     </div>
                 </div>
                 
                 <form name="addedit_form" id="addedit_form" action="../Views/User_Manager_AddEdit.php" method="POST">
-                    <input type="hidden" name="userid" id="userid_edit" value=-1>
-                    <input type="hidden" name="username" id="username_edit" value=''>
+                    <input type="hidden" name="groupid" id="groupid" value=-1>
+                    <input type="hidden" name="groupname" id="groupname" value=''>
                 </form>
                 
                 <div id="dialog"></div>

@@ -20,6 +20,6 @@ $(document).ready(function() {
         },
         text: false
     }).click(function() {
-        window.location = "../Controllers/Dig_List_Manager_Controller.php";
+        window.location = "../Views/groups.php";
     });
 });
