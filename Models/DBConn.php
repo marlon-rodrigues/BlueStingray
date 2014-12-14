@@ -8,12 +8,14 @@ class DBConn {
     private $password;
     private $host;
     private $database;
+    
     function __construct() {
         $this->username = "root";
         $this->password = "35617038";
         $this->host = "localhost";
         $this->database = "bluestingray";
     }
+    
     function open_connection() {
         $this->dbconn = new mysqli($this->host, $this->username, $this->password, $this->database);
         $return = array();
@@ -27,6 +29,7 @@ class DBConn {
         
         return $return;
     }
+    
     function close_connection() {
         mysqli_close($this->dbconn);
         return true;

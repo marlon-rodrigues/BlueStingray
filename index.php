@@ -1,9 +1,11 @@
+<?php
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
+    date_default_timezone_set('UTC');
+?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Users Manager Project | Blue Stingray</title>
@@ -22,7 +24,6 @@ and open the template in the editor.
         
         <script src="js/helpers/loader.js"></script>
         <script src="js/sys_manager.js"></script>
-        <!--<link rel="shortcut icon" href="images/lbn_globe.png">-->
     </head>
     <body>
         <div id="container">
@@ -31,6 +32,7 @@ and open the template in the editor.
             </header>
             
             <div id="content">
+                
                 <div id="accordion_sys_manager" align="center">
                     <h3>System Manager</h3>
                     <div>
@@ -45,8 +47,6 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-
-                <div id="dialog"></div>
             </div>
             
             <footer>

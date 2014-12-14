@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    //setup accordion
+        //setup accordion
     $('#accordion_sys_manager').accordion({
         icons: false,
         heightStyle: "content"
@@ -11,7 +11,7 @@ $(document).ready(function() {
         },
         text: false
     }).click(function() { 
-        window.location = "../Controllers/User_Controller.php";           
+        window.location = "../Views/users.php";           
     });
     
     $('#groups_btn').button({

@@ -27,3 +27,20 @@ h1 span {
     margin-right: 2em;
     margin-top: 3.5em;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+a.active {
+    color: black;
+}
