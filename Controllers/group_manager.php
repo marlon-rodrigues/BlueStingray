@@ -10,6 +10,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/group_model.php');
 $function_name = $_POST['function_name'];
 $groupname = (isset($_POST['groupname'])) ? $_POST['groupname'] : '';
 $groupid = (isset($_POST['groupid'])) ? $_POST['groupid'] : '';
+$users = (isset($_POST['users'])) ? $_POST['users'] : '';
 $return = array();
 /*
  * Redirects to the right function based on the "funciton name" passed
@@ -24,7 +25,7 @@ switch ($function_name) {
         $return = get_group_info($groupid);
         break;
     case 'add_update_group':
-        $return = add_update_group($groupid, $groupname);
+        $return = add_update_group($groupid, $groupname, $users);
         break;
     case 'delete_group':
         $return = delete_group($groupid);
@@ -54,69 +55,99 @@ function get_all_groups() {
     return $return_func;
 }
 
-function get_user_info($user_id){
-    $return_func['user'] = true;
+/*
+ * Get a single group in the db
+ * @author: Marlon Rodrigues
+ * @param: Int group_id - Group id been searched
+ * @return: array with group info or a error message
+ */
+function get_group_info($group_id){
+    $return_func['group'] = true;
+    $return_func['users'] = true;
     $return_func['message'] = '';
-    $login_model = new Login_Model();
-    $user = $login_model->get_user_info($user_id);
-    if (!$user) {
-        $return_func['user'] = false;
-        $return_func['message'] = 'There was an error retrieving users. Please contact Administrator.';
+    
+    $group_model = new Group_Model();
+    
+        //get groups
+    $group = $group_model->get_group_info($group_id);
+    
+    if ($group < 0) {
+        $return_func['group'] = false;
+        $return_func['users'] = false;
+        $return_func['message'] = 'There was an error retrieving group. Please contact Administrator.';
     } else {
-        $return_func['user'] = $user;
+        if(count($group) > 0){
+                //get users
+            $users = $group_model->get_group_users($group_id);
+            
+            if($users < 0){
+                $return_func['group'] = false;
+                $return_func['users'] = false;
+                $return_func['message'] = 'There was an error retrieving users associated with the group. Please contact Administrator.';
+            } else {
+                $return_func['group'] = $group;
+                $return_func['users'] = $users;
+            }
+        } else {
+            $return_func['group'] = false;
+            $return_func['users'] = false;
+            $return_func['message'] = 'Group was not found. Please try again.';
+        }   
     }
+    
     return $return_func;   
 }
 
-function add_update_user($userid, $username, $email, $password, $super_admin){
+/*
+ * Add update groups and users related to it
+ * @author: Marlon Rodrigues
+ * @param: Int groupid - Group id been searched, String groupname - Name of group been saved, Array $users - list of users id associated with the group
+ * @return: boolean
+ */
+function add_update_group($groupid, $groupname, $users){
     $return_func['success'] = true;
     $return_func['message'] = 'Save was successful';
-    $login_model = new Login_Model();
+    $group_model = new Group_Model();
     
     //validate fields
-    if ($username == '' || $username == NULL || trim($username) == ''){
+    if ($groupname == '' || $groupname == NULL || trim($groupname) == ''){
         $return_func['success'] = false;
-        $return_func['message'] = 'Please provide user name.';
+        $return_func['message'] = 'Please enter Group Name.';
         return $return_func;
     }
     
-    if ($password == '' || $password == NULL || trim($password) == ''){
+    //verify if group already exists
+    if($group_model->validate_group($groupname, $groupid)){
         $return_func['success'] = false;
-        $return_func['message'] = 'Please provide password.';
+        $return_func['message'] = 'Group name alrady exists.';
         return $return_func;
     }
-    
-    //if is a new user, verify if already exists
-    if ($userid < 0 || $userid == ''){
-         if($login_model->validate_user($username)){
-             $return_func['success'] = false;
-             $return_func['message'] = 'User name alrady exists.';
-             return $return_func;
-         } 
-    }
-    
-    //encript password
-    $psw = md5($password);
-    
-    //add/update user
-    if(!$login_model->add_update_user($username, $email, $psw, $super_admin, $userid)){
+
+    //add/update group
+    if(!$group_model->add_update_group($groupname, $groupid, $users)){
         $return_func['success'] = false;
-        $return_func['message'] = 'There was an error saving user. Please contact Administrator.';
+        $return_func['message'] = 'There was an error saving group. Please contact Administrator.';
     }
     
     return $return_func;   
 }
 
-function delete_user($userid){
+/*
+ * Delete a group and its relation with users
+ * @author: Marlon Rodrigues
+ * @param: Int groupid - Group id been deleted
+ * @return: boolean
+ */
+function delete_group($groupid){
     $return_func['success'] = true;
     $return_func['message'] = 'Delete was successful';
-    $login_model = new Login_Model();
+    $group_model = new Group_Model();
     
-    $del_user = $login_model->delete_user($userid);
+    $del_group = $group_model->delete_group($groupid);
     
-    if(!$del_user){
+    if(!$del_group){
         $return_func['success'] = false;
-        $return_func['message'] = 'There was an error deleting user. Please contact Administrator.';
+        $return_func['message'] = 'There was an error deleting group. Please contact Administrator.';
     }
     
     return $return_func; 

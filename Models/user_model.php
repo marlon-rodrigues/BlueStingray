@@ -6,8 +6,6 @@ date_default_timezone_set('UTC');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/DBConn.php');
 
 class User_Model extends DBConn {
-    private $name;
-    
     function __construct() {
         parent::__construct();
     }

@@ -64,3 +64,37 @@ body {
     margin-left: 25%;
 }
 
+#accordion_addedit_groups {
+    margin-top: 5em;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.update_buttons {
+    margin-top:3.5em; 
+    font-size: 14px
+}
+
+.table_info {
+    margin-top: 1em;
+}
+
+.delete_user {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.edit_user {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.delete_group {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.edit_group {
+    width: 30px !important;
+    height: 30px !important;
+}

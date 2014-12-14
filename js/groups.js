@@ -29,18 +29,18 @@ $(document).ready(function() {
             {"bVisible": false, "aTargets": [0]}
         ],
         "fnDrawCallback": function (oSettings) {
-            $('.edit_user').button({
+            $('.edit_group').button({
                 icons: {
                     primary: "ui-icon-pencil"
                 },
                 text: false
             }).unbind('click').bind('click', function () {
-                $('#userid_edit').val($(this).attr('id'));
-                $('#username_edit').val($(this).parent().prev().prev().prev().prev().html());
+                $('#groupid').val($(this).attr('id'));
+                $('#groupname').val($(this).parent().prev().html());
                 $('#addedit_form').submit();
             });
 
-            $('.delete_user').button({
+            $('.delete_group').button({
                 icons: {
                     primary: "ui-icon-close"
                 },
@@ -55,7 +55,7 @@ $(document).ready(function() {
                             text: 'YES',
                             click: function () {
                                 $(this).dialog('close');
-                                delete_user(id, row);
+                                delete_group(id, row);
                             }
                         },
                         {
@@ -64,7 +64,7 @@ $(document).ready(function() {
                                 $(this).dialog('close');
                             }
                         }]
-                }).html('Are you sure you want to delete user: ' + $(this).parent().prev().prev().prev().prev().html() + ' ?');
+                }).html('Are you sure you want to delete user: ' + $(this).parent().prev().html() + ' ?');
             });
         }
     });
@@ -75,8 +75,8 @@ $(document).ready(function() {
             primary: "ui-icon-circle-plus"
         }
     }).click(function () {
-        $('#userid_edit').val('');
-        $('#username_edit').val('');
+        $('#groupid').val('');
+        $('#groupname').val('');
         $('#addedit_form').submit();
     });
 
@@ -105,8 +105,8 @@ $(document).ready(function() {
                     oTable.fnClearTable();
                     for (i = 0; i < data['groups'].length; i++) {
                         oTable.fnAddData([
-                            data['users'][i]['id'],
-                            data['users'][i]['group_name'],
+                            data['groups'][i]['id'],
+                            data['groups'][i]['group_name'],
                             '<button class="edit_group" id="' + data['groups'][i]['id'] + '">Edit Group</button>' +
                                     '<button class="delete_group" id="' + data['groups'][i]['id'] + '">Delete Group</button>'
                         ]);
@@ -116,14 +116,14 @@ $(document).ready(function() {
         });
     }
 
-    function delete_user(user_id, row) {
+    function delete_group(group_id, row) {
         $.ajax({
-            url: '../Controllers/User_Services.php',
+            url: '../Controllers/group_manager.php',
             type: 'POST',
             dataType: 'json',
             data: {
-                function_name: 'delete_user',
-                userid_edit: user_id
+                function_name: 'delete_group',
+                groupid: group_id
             },
             success: function (data) {
                 $('#dialog').dialog({
@@ -137,7 +137,7 @@ $(document).ready(function() {
                 }).html(data['message']);
 
                 if (data['success']) {
-                    //delete row from the table
+                        //delete row from the table
                     oTable.fnDeleteRow(oTable.fnGetPosition(row));
                 }
             }

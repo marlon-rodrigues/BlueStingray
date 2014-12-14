@@ -44,8 +44,8 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th width="150px" align="left">Name</th>
-                                        <th width="70px"></th>
+                                        <th width="500px" align="left">Name</th>
+                                        <th width="30px"></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 
-                <form name="addedit_form" id="addedit_form" action="../Views/User_Manager_AddEdit.php" method="POST">
+                <form name="addedit_form" id="addedit_form" action="../Views/add_edit_group.php" method="POST">
                     <input type="hidden" name="groupid" id="groupid" value=-1>
                     <input type="hidden" name="groupname" id="groupname" value=''>
                 </form>
