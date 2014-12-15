@@ -35,8 +35,8 @@ $(document).ready(function() {
                 },
                 text: false
             }).unbind('click').bind('click', function () {
-                $('#userid_edit').val($(this).attr('id'));
-                $('#username_edit').val($(this).parent().prev().prev().prev().prev().html());
+                $('#userid').val($(this).attr('id'));
+                $('#username').val($(this).parent().prev().prev().html());
                 $('#addedit_form').submit();
             });
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
                                 $(this).dialog('close');
                             }
                         }]
-                }).html('Are you sure you want to delete user: ' + $(this).parent().prev().prev().prev().prev().html() + ' ?');
+                }).html('Are you sure you want to delete user: ' + $(this).parent().prev().prev().html() + ' ?');
             });
         }
     });
@@ -75,8 +75,8 @@ $(document).ready(function() {
             primary: "ui-icon-circle-plus"
         }
     }).click(function () {
-        $('#userid_edit').val('');
-        $('#username_edit').val('');
+        $('#userid').val('');
+        $('#username').val('');
         $('#addedit_form').submit();
     });
 
@@ -107,7 +107,7 @@ $(document).ready(function() {
                         oTable.fnAddData([
                             data['users'][i]['id'],
                             data['users'][i]['name'],
-                            'test',
+                            data['users'][i]['groups'],
                             '<button class="edit_user" id="' + data['users'][i]['id'] + '">Edit User</button>' +
                                     '<button class="delete_user" id="' + data['users'][i]['id'] + '">Delete User</button>'
                         ]);
@@ -119,12 +119,12 @@ $(document).ready(function() {
 
     function delete_user(user_id, row) {
         $.ajax({
-            url: '../Controllers/User_Services.php',
+            url: '../Controllers/user_manager.php',
             type: 'POST',
             dataType: 'json',
             data: {
                 function_name: 'delete_user',
-                userid_edit: user_id
+                userid: user_id
             },
             success: function (data) {
                 $('#dialog').dialog({

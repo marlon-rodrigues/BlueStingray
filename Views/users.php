@@ -45,8 +45,8 @@
                                     <tr>
                                         <th>id</th>
                                         <th width="150px" align="left">Name</th>
-                                        <th width="90px" align="left">Groups</th>
-                                        <th width="70px"></th>
+                                        <th width="300px" align="left">Groups</th>
+                                        <th width="30px"></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -60,9 +60,9 @@
                     </div>
                 </div>
                 
-                <form name="addedit_form" id="addedit_form" action="../Views/User_Manager_AddEdit.php" method="POST">
-                    <input type="hidden" name="userid" id="userid_edit" value=-1>
-                    <input type="hidden" name="username" id="username_edit" value=''>
+                <form name="addedit_form" id="addedit_form" action="../Views/add_edit_user.php" method="POST">
+                    <input type="hidden" name="userid" id="userid" value=-1>
+                    <input type="hidden" name="username" id="username" value=''>
                 </form>
                 
                 <div id="dialog"></div>

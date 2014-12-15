@@ -63,7 +63,7 @@ class Group_Model extends DBConn {
     * Add/edit groups
     * @author: Marlon Rodrigues
     * @param: String groupname - Name of the group, Int groupid - Group id, Array users - list of users
-    * @return: array with users or a error message
+    * @return: boolean
     */    
     function add_update_group($groupname, $groupid, $users){
         $conn_status = $this->open_connection();
@@ -110,7 +110,7 @@ class Group_Model extends DBConn {
     }
     
     /*
-    * Verifies if the group name alreday exists
+    * Verifies if the group alreday exists
     * @author: Marlon Rodrigues
     * @param: String groupname - Name of the group been validated, Int groupid - Group id been validated
     * @return: array with users or a error message
@@ -131,7 +131,7 @@ class Group_Model extends DBConn {
             if($result->num_rows > 0){
                 $group_row = mysqli_fetch_row($result);
                 
-                    //if it is editing a group, validation return false
+                    //if it is editing a group validation return false
                 if($group_row[0] == $groupid){
                     return false;
                 } else {
@@ -149,7 +149,7 @@ class Group_Model extends DBConn {
     * Delete group and its relation to users
     * @author: Marlon Rodrigues
     * @param: Int groupid Group id
-    * @return: array with users or a error message
+    * @return: boolean
     */  
     function delete_group($groupid){
         $conn_status = $this->open_connection();
@@ -200,25 +200,21 @@ class Group_Model extends DBConn {
         $result = $conn->query($sql);
        
         if($result){
-            $users_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            
-            if(!empty($users_array)){
-                foreach($users_array as $user){
-                    $sql_users = "SELECT * FROM users WHERE id = " . $user;
+            while($user = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $sql_users = "SELECT * FROM users WHERE id = " . $user['user_id'];
 
-                    $result_users = $conn->query($sql_users);
+                $result_users = $conn->query($sql_users);
 
-                    if($result_users){
-                        $users_row = mysqli_fetch_row($result_users);
+                if ($result_users) {
+                    $users_row = mysqli_fetch_row($result_users);
 
-                        $users[] = array(
-                            'id' => $users_row[0],
-                            'name' => $users_row[1]
-                        );
-                    } 
+                    $users[] = array(
+                        'id' => $users_row[0],
+                        'name' => $users_row[1]
+                    );
                 }
             }
-            
+
             return $users;
         } else {
             return -1;
