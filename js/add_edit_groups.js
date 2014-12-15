@@ -1,4 +1,7 @@
 $(document).ready(function() {
+        //hold group users
+    var group_users = []
+    
         //setup accordion
     $('#accordion_addedit_groups').accordion({
         icons: false,
@@ -32,6 +35,9 @@ $(document).ready(function() {
         //get group info if call is coming from edit group
     if ($('#groupid').text() != '') {
         get_group();
+        get_users();
+    } else {
+        get_users();
     }
     
         //get group info in case is updating
@@ -57,6 +63,10 @@ $(document).ready(function() {
                     }).html(data['message']);
                 } else {
                     $('#groupname').val(data['group']['group_name']);
+                    
+                    for (i = 0; i < data['users'].length; i++) { 
+                        group_users.push(data['users'][i]['id']);
+                    }
                 }
             }
         });
@@ -116,7 +126,11 @@ $(document).ready(function() {
             success: function (data) {
                 if (data['users']) {
                     for (i = 0; i < data['users'].length; i++) {
-                        $('#users_select').append($('<option></option>').attr('value', data['users'][i]['id']).text(data['users'][i]['name']));
+                        if(jQuery.inArray(data['users'][i]['id'], group_users) !== -1){
+                            $('#users_select').append($('<option></option>').attr('value', data['users'][i]['id']).attr('selected', 'selected').text(data['users'][i]['name']));
+                        } else {
+                            $('#users_select').append($('<option></option>').attr('value', data['users'][i]['id']).text(data['users'][i]['name']));
+                        } 
                         $('#users_select').multiselect("refresh");
                     }
                 }
@@ -124,6 +138,5 @@ $(document).ready(function() {
         });
     }
     
-    get_users();
 });
 
