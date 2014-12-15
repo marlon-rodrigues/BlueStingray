@@ -1,3 +1,6 @@
+/*
+ * Describe js for List Users View
+ */
 $(document).ready(function() {
         //setup accordion
     $('#accordion_users').accordion({

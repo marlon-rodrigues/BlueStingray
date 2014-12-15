@@ -1,7 +1,4 @@
 <?php
-/* 
- * Describes Group Model
- */
 date_default_timezone_set('UTC');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/DBConn.php');
 

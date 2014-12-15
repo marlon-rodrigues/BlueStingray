@@ -1,7 +1,4 @@
 <?php
-/*
- * Describe Connection with database
- */
 class DBConn {
     private $dbconn;
     private $username;

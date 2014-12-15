@@ -1,3 +1,6 @@
+/*
+ * Describe js for Add/Edit Users View
+ */
 $(document).ready(function() {
         //hold user groups
     var user_groups = [];
@@ -63,6 +66,7 @@ $(document).ready(function() {
                     }).html(data['message']);
                 } else {
                     $('#username').val(data['user']['name']);
+                        //create array with user groups
                     for (i = 0; i < data['groups'].length; i++) { 
                         user_groups.push(data['groups'][i]['id']);
                     }

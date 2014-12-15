@@ -1,3 +1,6 @@
+/*
+ * Describe js for List Groups View
+ */
 $(document).ready(function() {
         //setup accordion
     $('#accordion_groups').accordion({

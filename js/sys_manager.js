@@ -1,3 +1,6 @@
+/*
+ * Describe js for Sys Manager View (Index page)
+ */
 $(document).ready(function() {
         //setup accordion
     $('#accordion_sys_manager').accordion({

@@ -1,7 +1,4 @@
 <?php
-/* 
- * Describes User Model
- */
 date_default_timezone_set('UTC');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/DBConn.php');
 
@@ -10,6 +7,11 @@ class User_Model extends DBConn {
         parent::__construct();
     }
     
+    /*
+    * Get a list of all users in the db
+    * @author: Marlon Rodrigues
+    * @return: array with users or a error message
+    */
     function get_all_users(){
         $conn_status = $this->open_connection();
         $conn = $this->get_dbconn();
