@@ -44,8 +44,8 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th width="480px" align="left">Name</th>
-                                        <th width="50px"></th>
+                                        <th width="460px" align="left">Name</th>
+                                        <th width="70px"></th>
                                     </tr>
                                 </thead>
                             </table>
