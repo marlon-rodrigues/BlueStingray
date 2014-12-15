@@ -24,7 +24,7 @@
         <script src="../Libraries/jquery-multiselect/jquery-multiselect-min.js"></script>
         <link rel="stylesheet" href="../Libraries/jquery-multiselect/jquery-multiselect.css" />
         
-        <script src="../js/helpers/loader.js"></script>
+        <script src="../js/Helpers/loader.js"></script>
         <script src="../js/add_edit_groups.js"></script>
     </head>
     <body>

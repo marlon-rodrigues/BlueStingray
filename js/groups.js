@@ -93,8 +93,8 @@ $(document).ready(function() {
             data: {
                 function_name: 'get_all_groups'
             },
-            success: function (data) {
-                if (!data['groups']) {
+            success: function (data) { 
+                if (!data['success']) {
                     $('#dialog').dialog({
                         title: 'Notice',
                         buttons: [{
@@ -104,15 +104,17 @@ $(document).ready(function() {
                                 }
                             }]
                     }).html(data['message']);
-                } else {
-                    oTable.fnClearTable();
-                    for (i = 0; i < data['groups'].length; i++) {
-                        oTable.fnAddData([
-                            data['groups'][i]['id'],
-                            data['groups'][i]['group_name'],
-                            '<button class="edit_group" id="' + data['groups'][i]['id'] + '">Edit Group</button>' +
-                                    '<button class="delete_group" id="' + data['groups'][i]['id'] + '">Delete Group</button>'
-                        ]);
+                } else { 
+                    if(data['groups']){ 
+                        oTable.fnClearTable();
+                        for (i = 0; i < data['groups'].length; i++) { 
+                            oTable.fnAddData([
+                                data['groups'][i]['id'],
+                                data['groups'][i]['group_name'],
+                                '<button class="edit_group" id="' + data['groups'][i]['id'] + '">Edit Group</button>' +
+                                        '<button class="delete_group" id="' + data['groups'][i]['id'] + '">Delete Group</button>'
+                            ]);
+                        }
                     }
                 }
             }

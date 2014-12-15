@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 
 date_default_timezone_set('UTC');
 
-require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/group_model.php');
+require_once('../Models/group_model.php');
 $function_name = $_POST['function_name'];
 $groupname = (isset($_POST['groupname'])) ? $_POST['groupname'] : '';
 $groupid = (isset($_POST['groupid'])) ? $_POST['groupid'] : '';
@@ -40,6 +40,7 @@ echo json_encode($return);
  */
 function get_all_groups() {
     $return_func['groups'] = true;
+    $return_func['success'] = true;
     $return_func['message'] = '';
     
     $group_model = new Group_Model();
@@ -47,6 +48,7 @@ function get_all_groups() {
     
     if ($groups < 0) {
         $return_func['groups'] = false;
+        $return_func['success'] = false;
         $return_func['message'] = 'There was an error retrieving groups. Please contact Administrator.';
     } else {   
         $return_func['groups'] = $groups;

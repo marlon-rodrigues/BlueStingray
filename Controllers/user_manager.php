@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 
 date_default_timezone_set('UTC');
 
-require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/user_model.php');
+require_once('../Models/user_model.php');
 $function_name = $_POST['function_name'];
 $username = (isset($_POST['username'])) ? $_POST['username'] : '';
 $userid = (isset($_POST['userid'])) ? $_POST['userid'] : '';
@@ -40,6 +40,7 @@ echo json_encode($return);
  */
 function get_all_users() {
     $return_func['users'] = true;
+    $return_func['success'] = true;
     $return_func['message'] = '';
     
     $user_model = new User_Model();
@@ -47,6 +48,7 @@ function get_all_users() {
     
     if ($users < 0) {
         $return_func['users'] = false;
+        $return_func['success'] = false;
         $return_func['message'] = 'There was an error retrieving users. Please contact Administrator.';
     } else {   
         $return_func['users'] = $users;

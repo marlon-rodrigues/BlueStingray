@@ -94,7 +94,7 @@ $(document).ready(function() {
                 function_name: 'get_all_users'
             },
             success: function (data) {
-                if (!data['users']) {
+                if (!data['success']) {
                     $('#dialog').dialog({
                         title: 'Notice',
                         buttons: [{
@@ -105,15 +105,17 @@ $(document).ready(function() {
                             }]
                     }).html(data['message']);
                 } else {
-                    oTable.fnClearTable();
-                    for (i = 0; i < data['users'].length; i++) {
-                        oTable.fnAddData([
-                            data['users'][i]['id'],
-                            data['users'][i]['name'],
-                            data['users'][i]['groups'],
-                            '<button class="edit_user" id="' + data['users'][i]['id'] + '">Edit User</button>' +
-                                    '<button class="delete_user" id="' + data['users'][i]['id'] + '">Delete User</button>'
-                        ]);
+                    if(data['users']){
+                        oTable.fnClearTable();
+                        for (i = 0; i < data['users'].length; i++) {
+                            oTable.fnAddData([
+                                data['users'][i]['id'],
+                                data['users'][i]['name'],
+                                data['users'][i]['groups'],
+                                '<button class="edit_user" id="' + data['users'][i]['id'] + '">Edit User</button>' +
+                                        '<button class="delete_user" id="' + data['users'][i]['id'] + '">Delete User</button>'
+                            ]);
+                        }
                     }
                 }
             }

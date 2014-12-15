@@ -38,7 +38,6 @@ $(document).ready(function() {
         //get group info if call is coming from edit group
     if ($('#groupid').text() != '') {
         get_group();
-        get_users();
     } else {
         get_users();
     }
@@ -71,6 +70,8 @@ $(document).ready(function() {
                     for (i = 0; i < data['users'].length; i++) { 
                         group_users.push(data['users'][i]['id']);
                     }
+                        //get users
+                    get_users();
                 }
             }
         });

@@ -14,7 +14,7 @@ $(document).ready(function() {
         },
         text: false
     }).click(function() { 
-        window.location = "../Views/users.php";           
+        window.location = window.location.href+"Views/users.php";           
     });
     
     $('#groups_btn').button({
@@ -23,6 +23,6 @@ $(document).ready(function() {
         },
         text: false
     }).click(function() {
-        window.location = "../Views/groups.php";
+        window.location = window.location.href+"Views/groups.php";
     });
 });

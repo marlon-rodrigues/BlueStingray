@@ -7,28 +7,31 @@ class DBConn {
     private $database;
     
     function __construct() {
-        $this->username = "root";
+        $this->username = "vanzopob_marlon";
         $this->password = "35617038";
         $this->host = "localhost";
-        $this->database = "bluestingray";
+        $this->database = "vanzopob_bluestingray";
     }
     
     function open_connection() {
-        $this->dbconn = new mysqli($this->host, $this->username, $this->password, $this->database);
+        $this->dbconn = mysql_connect($this->host, $this->username, $this->password);
         $return = array();
-        if ($this->dbconn->connect_errno) {
-            $return['message'] = "Failed to connect to MySql" . $this->dbconn->connect_error();
+        
+        if(!$this->dbconn) {
+            $return['message'] = "Failed to connect to MySql" . mysql_error();
             $return['status'] = '1';
         } else {
             $return['message'] = "Connected Succesfully";
             $return['status'] = '0';
+            
+            mysql_select_db($this->database, $this->dbconn);
         }
         
         return $return;
     }
     
     function close_connection() {
-        mysqli_close($this->dbconn);
+        mysql_close($this->dbconn);
         return true;
     }
     

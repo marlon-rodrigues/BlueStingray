@@ -18,11 +18,11 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="Libraries/jquery-1.11.1.js"></script>
-        <link rel="stylesheet" href="../Libraries/jquery-ui-1.11.2.custom/jquery-ui.min.css" />
-        <script src="../Libraries/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="Libraries/jquery-ui-1.11.2.custom/jquery-ui.min.css" />
+        <script src="Libraries/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
         
         
-        <script src="js/helpers/loader.js"></script>
+        <script src="js/Helpers/loader.js"></script>
         <script src="js/sys_manager.js"></script>
     </head>
     <body>

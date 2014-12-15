@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="../Libraries/DataTables-1.9.4/media/css/demo_table.css" />
         <link rel="stylesheet" href="../Libraries/DataTables-1.9.4/media/css/demo_table_jui.css" />
         
-        <script src="../js/helpers/loader.js"></script>
+        <script src="../js/Helpers/loader.js"></script>
         <script src="../js/groups.js"></script>
     </head>
     <body>

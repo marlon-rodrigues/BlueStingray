@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('UTC');
-require_once($_SERVER["DOCUMENT_ROOT"] . '/Models/DBConn.php');
+require_once('../Models/DBConn.php');
 
 class Group_Model extends DBConn {
     function __construct() {
@@ -20,12 +20,19 @@ class Group_Model extends DBConn {
             return false;
         }
         
+        $groups_array = array();
+        
         $sql = "SELECT * FROM groups ORDER by group_name";
-       
-        $result = $conn->query($sql);
+        $result = mysql_query($sql, $conn);
        
         if($result){ 
-            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+            while ($group = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                $groups_array[] = array(
+                    'id' => $group['id'],
+                    'group_name' => $group['group_name']
+                );
+            }
+            return $groups_array;
         } else {
             return -1;
         }
@@ -47,10 +54,10 @@ class Group_Model extends DBConn {
         
         $sql = "SELECT * FROM groups WHERE id = " . $group_id;
        
-        $result = $conn->query($sql);
+        $result = mysql_query($sql, $conn);
        
         if($result){
-            return mysqli_fetch_array($result, MYSQLI_ASSOC);
+            return mysql_fetch_array($result, MYSQLI_ASSOC);
         } else {
             return -1;
         }
@@ -74,26 +81,26 @@ class Group_Model extends DBConn {
             $sql = "INSERT INTO groups (group_name)
                     VALUES ('" . $groupname . "')"; 
             
-            $result = $conn->query($sql);
+            $result = mysql_query($sql, $conn);
                 //get the last id inserted
-            $groupid = mysqli_insert_id($conn);
+            $groupid = mysql_insert_id();
         } else {
             $sql = "UPDATE groups SET group_name = '" . $groupname . "'
                     WHERE id = " . $groupid;         
-            $result = $conn->query($sql);
+            $result = mysql_query($sql, $conn);
         }
         
         if($result){
                 //update users_group table
             $sql_del_group = "DELETE FROM users_group WHERE group_id = " . $groupid;
-            $result_del_group = $conn->query($sql_del_group);
+            $result_del_group = mysql_query($sql_del_group, $conn);
             
             if($result_del_group) {
                 if(!empty($users)){
                     foreach($users as $user){
                         $sql_add_users = "INSERT INTO users_group (user_id, group_id)
                                           VALUES (" . $user . ", " . $groupid . ")"; 
-                        $conn->query($sql_add_users);
+                        mysql_query($sql_add_users, $conn);
                     }
                 }
             } else {
@@ -122,12 +129,12 @@ class Group_Model extends DBConn {
         
         $sql = "SELECT * FROM groups WHERE group_name = '" . $groupname . "' LIMIT 1";
        
-        $result = $conn->query($sql);
+        $result = mysql_query($sql, $conn);
        
         if($result){
-            if($result->num_rows > 0){
-                $group_row = mysqli_fetch_row($result);
-                
+            if(mysql_num_rows($result) > 0){
+                $group_row = mysql_fetch_row($result);
+               
                     //if it is editing a group validation return false
                 if($group_row[0] == $groupid){
                     return false;
@@ -158,13 +165,13 @@ class Group_Model extends DBConn {
         
             //delete all the associations with users
         $sql_del_assoc = "DELETE from users_group WHERE group_id = " . $groupid;
-        $result_del = $conn->query($sql_del_assoc);
+        $result_del = mysql_query($sql_del_assoc, $conn);
         
         if($result_del){
                 //delete group
             $sql = "DELETE FROM groups WHERE id = " . $groupid;
 
-            $result = $conn->query($sql);
+            $result = mysql_query($sql, $conn);
             
             if($result){
                 return true;
@@ -194,16 +201,16 @@ class Group_Model extends DBConn {
         
         $sql = "SELECT user_id FROM users_group WHERE group_id = " . $group_id;
        
-        $result = $conn->query($sql);
+        $result = mysql_query($sql, $conn);
        
         if($result){
-            while($user = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            while($user = mysql_fetch_array($result, MYSQLI_ASSOC)){
                 $sql_users = "SELECT * FROM users WHERE id = " . $user['user_id'];
 
-                $result_users = $conn->query($sql_users);
+                $result_users = mysql_query($sql_users, $conn);
 
                 if ($result_users) {
-                    $users_row = mysqli_fetch_row($result_users);
+                    $users_row = mysql_fetch_row($result_users);
 
                     $users[] = array(
                         'id' => $users_row[0],
