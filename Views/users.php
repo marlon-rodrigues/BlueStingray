@@ -44,9 +44,9 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th width="150px" align="left">Name</th>
-                                        <th width="300px" align="left">Groups</th>
-                                        <th width="30px"></th>
+                                        <th width="140px" align="left">Name</th>
+                                        <th width="290px" align="left">Groups</th>
+                                        <th width="50px"></th>
                                     </tr>
                                 </thead>
                             </table>
